@@ -121,6 +121,7 @@
                             </tr>
                         </thead>
                         <tbody>
+				<t t-set="total_qty_custom" t-value="0"/>
                             <t t-set="lines" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty)"/>
                             <tr t-foreach="lines" t-as="move"><t t-foreach="move.move_line_ids" t-as="move_line">
                                 <td>
@@ -157,6 +158,7 @@
                                 	<span t-esc="'%.1f'%move.product_id.weight"/>
                                 </td>
                                 </t>
+				    <t t-set="total_qty_custom" t-value="total_qty_custom + move_line.qty_done"/>
                             </tr>
                         </tbody>
                     </table>
@@ -180,6 +182,7 @@
                             </tr>
                         </thead>
                         <tbody>
+				<t t-set="total_qty_custom" t-value="0"/>
                             <tr t-foreach="o.move_line_ids" t-as="move_line">
                                 <td>
                                     <span t-field="move_line.product_id"/>
@@ -217,6 +220,7 @@
                                 <td class="text-right">
                                 	<span t-esc="'%.1f'%move_line.product_id.weight"/>
                                 </td>
+				    <t t-set="total_qty_custom" t-value="total_qty_custom + move_line.qty_done"/>
                             </tr>
                         </tbody>
                     </table>
@@ -250,7 +254,7 @@
 				                            	</t>
 				                            	</t>
 				                           		<t t-if="total_qty &gt;0.0 and total_x_studio_field_JuQGN &gt;0.0">
-						                           <span t-esc="'%0.02f'%(final_total_package)"/>
+						                           <span t-esc="'%0.02f'%(total_qty_custom)"/>
 											   </t>
 			                            	</td> 
 	                            		</tr>
